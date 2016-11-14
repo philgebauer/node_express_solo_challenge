@@ -20,7 +20,7 @@ $(document).ready(function() {
     $("#jokeBox").empty();
 
     for (var i = 0; i < jokes.length; i++) {
-      $("#jokeBox").append('<div><h2>' + jokes[i].whoseJoke + '</h2><p>' + jokes[i].jokeQuestion + jokes[i].punchLine + '</p></div>');
+      $("#jokeBox").append('<div><h2>' + jokes[i].whoseJoke + '</h2><p>' + jokes[i].jokeQuestion + '</p><p>' + jokes[i].punchLine + '</p></div>');
     }
 
   }
