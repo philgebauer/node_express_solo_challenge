@@ -4,11 +4,13 @@ var app = express();
 var bodyParser = require('body-parser');
 var path = require('path');
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
 var jokes = require ( './routes/jokes.js')
 
-
-
-app.use(bodyParser.urlencoded({ extended: true }));
+// 
+//
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('port', process.env.PORT || 3000);
 

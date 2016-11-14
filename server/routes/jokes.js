@@ -23,8 +23,13 @@ var jokes = [
   }
 ];
 
+router.get('/', function(req, res) {
+  console.log('get jokes');
+  res.send(jokes);
+});
 
-router.post('/', function(req, res) {
+
+router.post('/', function (req, res) {
   console.log('adding a new joke');
   // console.log('req dot body', req.body);
   jokes.push(req.body);

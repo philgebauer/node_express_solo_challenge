@@ -16,33 +16,33 @@ $(document).ready(function() {
     });
   }
 
-  function appendJokes(cats) {
+  function appendJokes(jokes) {
     $("#jokeBox").empty();
 
-    for (var i = 0; i < cats.length; i++) {
-      $("#jokeBox").append('<div><h2>' + jokes[i].whoseJoke + '</h2><p>' + jokes[i].jokeQuestion + jokes[i].punchLine'</p></div>');
+    for (var i = 0; i < jokes.length; i++) {
+      $("#jokeBox").append('<div><h2>' + jokes[i].whoseJoke + '</h2><p>' + jokes[i].jokeQuestion + jokes[i].punchLine + '</p></div>');
     }
 
   }
 
   $("#jokeForm").on("submit", postJoke);
 
-  function postJoke(cat) {
+  function postJoke(joke) {
     event.preventDefault();
-    var newCat = {};
+    var newJoke = {};
 
-    $.each($('#catForm').serializeArray(), function(i, field) {
-      newCat[field.name] = field.value;
+    $.each($('#jokeForm').serializeArray(), function(i, field) {
+      newJoke[field.name] = field.value;
     });
 
-    console.log(newCat);
+    console.log(newJoke);
 
     $.ajax({
       type: 'POST',
-      url: '/cats',
-      data: newCat,
+      url: '/jokes',
+      data: newJoke,
       success: function(data) {
-        getCats();
+        getJokes();
       }
     });
   }
