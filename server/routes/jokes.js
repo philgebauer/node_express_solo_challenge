@@ -1,10 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-//jokes data
-console.log('got a joke');
-
-
+// - all the jokes! - //
 var jokes = [
   {
     whoseJoke: "Huck",
@@ -22,6 +19,8 @@ var jokes = [
     punchLine: "If you pee on them they disappear."
   }
 ];
+
+
 
 router.get('/', function(req, res) {
   console.log('get jokes');

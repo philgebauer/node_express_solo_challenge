@@ -1,55 +1,56 @@
-console.log('js loaded');
-
 $(document).ready(function() {
-  console.log('up and running!');
 
-  getJokes();
+// - get thte jokes from the jokes.js rile - //
 
-  function getJokes() {
-    $.ajax({
-      type: 'GET',
-      url: '/jokes',
-      success: function(data) {
-        console.log('got the joke data!');
-        appendJokes(data);
-      }
-    });
-  }
+    getJokes();
 
-  function appendJokes(jokes) {
-    $("#jokeBox").empty();
-
-    for (var i = 0; i < jokes.length; i++) {
-      $("#jokeBox").append('<div><h2>' + jokes[i].whoseJoke + '</h2><p>' + jokes[i].jokeQuestion + '</p><p>' + jokes[i].punchLine + '</p></div>');
+    function getJokes() {
+        $.ajax({
+            type: 'GET',
+            url: '/jokes',
+            success: function(data) {
+                console.log('got the joke data!');
+                appendJokes(data);
+            }
+        });
     }
 
-  }
+// - append jokees to the DOM - //
+    function appendJokes(jokes) {
+        $("#jokeBox").empty();
 
-  $("#jokeForm").on("submit", postJoke);
+        for (var i = 0; i < jokes.length; i++) {
+            $("#jokeBox").append('<div><h2>' + jokes[i].whoseJoke + '</h2><p>' + jokes[i].jokeQuestion + '</p><p>' + jokes[i].punchLine + '</p></div>');
+        }
 
-  function postJoke(joke) {
-    event.preventDefault();
+    }
 
-    $( '#whoseJoke' ).val('');
-    $( '#jokeQuestion' ).val('');
-    $( '#punchLine' ).val('');
+    $("#jokeForm").on("submit", postJoke);
 
+// - add incoming jokes to the jokes object - //
 
-    var newJoke = {};
+    function postJoke(joke) {
+        event.preventDefault();
 
-    $.each($('#jokeForm').serializeArray(), function(i, field) {
-      newJoke[field.name] = field.value;
-    });
+        var newJoke = {};
 
-    console.log(newJoke);
+        $.each($('#jokeForm').serializeArray(), function(i, field) {
+            newJoke[field.name] = field.value;
+        });
 
-    $.ajax({
-      type: 'POST',
-      url: '/jokes',
-      data: newJoke,
-      success: function(data) {
-        getJokes();
-      }
-    });
-  }
+  // - clear input fields - //
+
+        $('#whoseJoke').val('');
+        $('#jokeQuestion').val('');
+        $('#punchLine').val('');
+
+        $.ajax({
+            type: 'POST',
+            url: '/jokes',
+            data: newJoke,
+            success: function(data) {
+                getJokes();
+            }
+        });
+    }
 });
