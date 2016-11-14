@@ -29,6 +29,12 @@ $(document).ready(function() {
 
   function postJoke(joke) {
     event.preventDefault();
+
+    $( '#whoseJoke' ).val('');
+    $( '#jokeQuestion' ).val('');
+    $( '#punchLine' ).val('');
+
+
     var newJoke = {};
 
     $.each($('#jokeForm').serializeArray(), function(i, field) {
